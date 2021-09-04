@@ -1,0 +1,65 @@
+\title{Information Entropy}
+\author{Levi Finkelstein}
+\date{04 09 2021}
+
+\begin{document}
+\maketitle
+
+\paragraph{I.}
+Imagine that you're a detective faced with a murder and a list of $16$ suspects each whom is equally likely to have done it prior to you starting your investigation. 
+\par
+When you find a clue indicating that the culprit is a woman you can remove the $8$ male suspects, leaving you with $8$ female suspects. How do you quantify how much information this clue gave you? One way is to specify the fraction by which it scaled the search space, which in this case was by a half:
+$$\frac{1}{2}*16 = 8$$
+So $\frac{1}{2}$ was the information gain. This means you need $\frac{1}{16}$ information in total to find the murderer, i.e. to reduce the search space from $16$ to $1$.
+\par
+Another way to specify this is to talk about how many times you require the search space be halved. In this case:
+$$(\frac{1}{2})^N*16 = 1 \Rightarrow N=4$$ 
+So you need $4$ halvings. 
+\par
+An equivalent way of saying this is that you need $4$ bits. The reason it makes sense to equate bits to halvings is that a bit can only take on two values, so each of $1$ and $0$ would exclude each their own equally sized disjoint sections of the search space (for example $0=men$ and $1=women$). \textbf{If you learn 1 bit of information you reduce the search space by a half.}
+\par
+In general if there are $S$ suspects you need clues worth a total of $N=\log_2{S}$ bits of information since 
+$$(\frac{1}{2})^N*S=1 \Rightarrow (\frac{1}{2})^N=\frac{1}{S}\Rightarrow 2^N=S$$
+$$\Rightarrow \log_2{2^N}=\log_2{S} \Rightarrow N = \log_2{S}$$
+
+Conversely, since $2^N = S$ you can also think of $N$ (the number of bits) as how many doublings you need to go from $1$ to the size of the initial search space $S$.
+\paragraph{II.}
+In this case the \textit{probability} of a suspect being the murderer is equal to the fraction they take up in the current search space. So before any clues were discovered each on of them had a probability $p=\frac{1}{16}$ of being guilty.
+After discovering the first clue the men were excluded from the search space, receiving no fraction of it ($p=0$), with the women receiving a bigger fraction $p=\frac{1}{8}$ of the remaining space.
+\par
+From this you can see that \textbf{the more information you gain the more probability mass gets concentrated in a smaller space}. When all the probability mass gets concentrated at a single point ($p=1$ that a single person is the murderer) you've gained all the information you can.
+\par
+In a converse way, the more information there is (to gain?) the more probability mass is spread out. This way to think about information involves considering how many times (how many bits) you need to take half the probability mass and concentrate it on another half until you end up with everything on single point.
+\par
+Before finding the first clue the probability of the guilty being a woman was $p=\frac{1}{2}$. So encountering an event that \textit{used} to be $p=\frac{1}{2}$ means now setting it to $p=1$ by stealing all the probability mass that's outside the event, in this case the $\frac{1}{2}$ of mass contained in the "the murderer is a man" event.
+\par
+The number of bits gained by learning a probability $p$ fact is then equal to
+$$\log_2{\frac{1}{p}}=\log_2{p^{-1}}=-\log_2{p}$$
+Because:\begin{enumerate}
+    \item $p$ is the fraction by which you're scaling the search space (the fraction of the space you're cramming all the probability mass into).
+    \item $\frac{1}{p}$ is how many times smaller the search space is (how many times smaller the space containing all the probability mass is).
+    \item The $N$ in $2^N=\frac{1}{p}$ is then how many times you need to cut the search space in two for it to be $\frac{1}{p}$ times smaller (how many times you need to relocate half the probability mass to fit it all in a space $\frac{1}{p}$ times smaller).
+    \item So $N=\log_2{\frac{1}{p}} = $ the number of bits gained.
+\end{enumerate}
+
+\paragraph{III.}
+The expected value of a random variable $X$ with distribution $P$ is
+$$E(X)=\sum_{i}{}x_i P(x_i)$$
+If we treat the number of bits $\log_2{\frac{1}{p}}$ of information gained as a random variable, then we have a probability $p$ of gaining $\log_2{\frac{1}{p}}$ bits of information from any sample of this distribution.
+\par
+This is what \textit{information entropy} is: the expected amount of information gained from a single sample of a probability distribution (the expected number of times you need to relocate half of the probability mass to fit it all within the space of the sampled event): 
+$$H(X)=E(\log_2{\frac{1}{p}})=\sum p\log_2{\frac{1}{p}}=-\sum p_i\log_2{p}$$
+\par
+Here are some distributions:
+$$D_1=\{p_1=1,p_2=0\}$$
+$$D_2=\{p_1=0.5, p_2=0.5\}$$
+$$D_3=\{p_1=0.5, p_2=0.2, p_3=0.3\}$$
+\begin{itemize}
+    \item
+        The entropy of $D_1$ is $0$ since all the probability mass is already concentrated at a single point.
+    \item
+        The entropy of $D_2$ is $1$ since you you're gueranted to sample a $p=0.5$ event which needs to relocate half the probability mass once to concentrated it all at a single point.
+    \item
+\end{itemize}
+Repeating the mantra from earlier: the more information you gain the more probability mass gets concentrated in a smaller space. And the more probability mass gets concentrated in a smaller space the less information there is to gain, so the information entropy is smaller. In a way information gain is a property of an event while information entropy is a property of a distribution, in the same way probability is a property of an event while expected value is the property of a distribution.
+\end{document}
