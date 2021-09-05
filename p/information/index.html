@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Levi Finkelstein" />
-  <title>Information Entropy</title>
+  <title>Information</title>
   <style>
     html {
       line-height: 1.5;
@@ -152,7 +152,7 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Information Entropy</h1>
+<h1 class="title">Information</h1>
 <p class="author">Levi Finkelstein</p>
 <p class="date">04 09 2021</p>
 </header>
@@ -176,14 +176,27 @@
 <li><p>So <span class="math inline">\(N=\log_2{\frac{1}{p}} =\)</span> the number of bits gained.</p></li>
 </ol>
 <h4 id="iii.">III.</h4>
-<p>The expected value of a random variable <span class="math inline">\(X\)</span> with distribution <span class="math inline">\(P\)</span> is <span class="math display">\[E(X)=\sum_{i}{}x_i P(x_i)\]</span> If we treat the number of bits <span class="math inline">\(\log_2{\frac{1}{p}}\)</span> of information gained as a random variable, then we have a probability <span class="math inline">\(p\)</span> of gaining <span class="math inline">\(\log_2{\frac{1}{p}}\)</span> bits of information from any sample of this distribution.</p>
-<p>This is what <em>information entropy</em> is: the expected amount of information gained from a single sample of a probability distribution (the expected number of times you need to relocate half of the probability mass to fit it all within the space of the sampled event): <span class="math display">\[H(X)=E(\log_2{\frac{1}{p}})=\sum p\log_2{\frac{1}{p}}=-\sum p_i\log_2{p}\]</span></p>
-<p>Here are some distributions: <span class="math display">\[D_1=\{p_1=1,p_2=0\}\]</span> <span class="math display">\[D_2=\{p_1=0.5, p_2=0.5\}\]</span> <span class="math display">\[D_3=\{p_1=0.5, p_2=0.2, p_3=0.3\}\]</span></p>
+<p>The expected value of a random variable <span class="math inline">\(X\)</span> with distribution <span class="math inline">\(P\)</span> is <span class="math display">\[E(X)=\sum_{i}{}x_i P(x_i)\]</span> If we treat the number of bits <span class="math inline">\(\log_2{\frac{1}{p}}\)</span> of information gained as a random variable, then we have a probability <span class="math inline">\(p\)</span> of gaining <span class="math inline">\(\log_2{\frac{1}{p}}\)</span> bits of information from a random sample of this distribution.</p>
+<p>This is what <em>information entropy</em> is: the expected amount of information gained from a single sample of a probability distribution (the expected number of times you need to relocate half of the probability mass to fit it all within the space of the sampled event): <span class="math display">\[H(X)=E(\log_2{\frac{1}{p}})=\sum_{i} p_i\log_2{\frac{1}{p_i}}=-\sum_{i} p_i\log_2{p_i}\]</span></p>
+<p>Here are some distributions: <span class="math display">\[D_1=\{p_1=1\}\]</span> <span class="math display">\[D_2=\{p_1=0.5, p_2=0.5\}\]</span> <span class="math display">\[D_3=\{p_1=0.5, p_2=0.2, p_3=0.3\}\]</span></p>
 <ul>
 <li><p>The entropy of <span class="math inline">\(D_1\)</span> is <span class="math inline">\(0\)</span> since all the probability mass is already concentrated at a single point.</p></li>
-<li><p>The entropy of <span class="math inline">\(D_2\)</span> is <span class="math inline">\(1\)</span> since you you’re gueranted to sample a <span class="math inline">\(p=0.5\)</span> event which needs to relocate half the probability mass once to concentrated it all at a single point.</p></li>
-<li></li>
+<li><p>The entropy of <span class="math inline">\(D_2\)</span> is <span class="math inline">\(1\)</span> since you you’re guaranteed to sample a <span class="math inline">\(p=0.5\)</span> event which needs to relocate half the probability mass once to concentrated it all at a single point.</p></li>
+<li><p>The entropy of <span class="math inline">\(D_3\)</span> is <span class="math display">\[0.5 \log_2{\frac{1}{0.5}} + 0.2 \log_2{\frac{1}{0.2}} + 0.3 \log_2{\frac{1}{0.3}}\approx 1.485\]</span> If you imagine <span class="math inline">\(D_3\)</span> as a distribution of possible <em>clues</em> you might discover in your murder investigation, then on average you expect learning <span class="math inline">\(1.485\)</span> bits of information from each clue, or equivalently scaling the number of remaining suspects by a factor <span class="math inline">\((\frac{1}{2})^{1.485}\)</span>. Meaning that you would on average need a little under <span class="math inline">\(3\)</span> clues to find the murderer (to scale the search space down to <span class="math inline">\(1\)</span>).</p></li>
 </ul>
-<p>Repeating the mantra from earlier: the more information you gain the more probability mass gets concentrated in a smaller space. And the more probability mass gets concentrated in a smaller space the less information there is to gain, so the information entropy is smaller. In a way information gain is a property of an event while information entropy is a property of a distribution, in the same way probability is a property of an event while expected value is the property of a distribution.</p>
+<h4 id="iiii.">IIII.</h4>
+<p>There’s something peculiar about the fact that in <span class="math inline">\(p\log_2{\frac{1}{p}}\)</span>, <span class="math inline">\(p\)</span> both determines how likely the event is and how much information you gain from observing it. But if you think back to the <span class="math inline">\(16\)</span> suspects with equal probability of being guilty you can kind of see how information gain and probability are two sides of the same coin: the probability <span class="math inline">\(p=\frac{1}{16}\)</span> was derived from how much space any single person took up in the search space, and how much information you gain from learning that any one person is the murderer is exactly equal to how much you scale the search space, which is exactly the how much space they take up in the search space.</p>
+<p>This idea of scaling a search space (concentrating probability mass) is fundamentally what information is. Shannon said</p>
+<blockquote>
+<p>The fundamental problem of communication is that of reproducing at one point either exactly or approximately a message selected at another point. Frequently the messages have meaning; that is they refer to or are correlated according to some system with certain physical or conceptual entities. These semantic aspects of communication are irrelevant to the engineering problem. The significant aspect is that the actual message is one selected from a set of possible messages. The system must be designed to operate for each possible selection, not just the one which will actually be chosen since this is unknown at the time of design.</p>
+</blockquote>
+<p>If you have an infinite set of messages that your recipient is supposed to search through then you need an infinite number of bits to specify exactly which one you’re sending.</p>
+<p>Being a detective trying to figure out who did it is from an information theoretical point view the same thing as understanding a message sent from your friend. Before reading the message there’s a space of possible things your friend might be meaning to communicate with you. Before finding any clues there’s a space of possible suspects who might’ve done it. When reading the message, every bit of information reduces the space by half until you’ve pinpointed to a satisfactory level of certainty what’s it’s supposed to say. When finding clues, the space of suspects reduces by half for every bit gained until it’s down to a single person.</p>
+<p>Speaking more generally: when interfacing with the world you gain information about it (reduce the possibility space) by deleting the possible world that are incompatible with your observations. (realistically you would likely do this in a Bayesian way by updating probability distributions, with the prior space of possible worlds being a prior distribution).</p>
+<h4 id="random-notes"><em>Random notes</em></h4>
+<ul>
+<li><p>In the binary search algorithm you gain <span class="math inline">\(1\)</span> bit of information about the position of what you’re searching for in each iteration thus making it have runtime <span class="math inline">\(O(\log_2{N})\)</span> since that’s how many times you have to half the search space.</p></li>
+<li><p>...</p></li>
+</ul>
 </body>
 </html>
