@@ -83,8 +83,19 @@ Speaking more generally: when interfacing with the world you gain information ab
 
 \paragraph{\textit{Random notes}}
 \begin{itemize}
+    \item The entropy of a distribution can be interpreted as a measure of how much information it contains (how much information it can give you before it runs out of information).
+    \item
+        The conditional entropy $H(X|Y)$ can be thought of as the information left in the distribution of $X$ after an event $Y$ has happened. For example the entropy remaining in the distribution of suspects after learning that the guilty is a woman.
+    \item
+        The information gain of an event can be defined as the difference between the entropy of the distribution minus the entropy of the distribution conditioned on the event: $IG(X|A) = H(X) - H(X|A)$. This makes sense if you think about the conditional entropy $H(X|A)$ as being a measure of how much information is left in the distribution after the event $A$ happened ($IG(X|A)$ is how much information X lost and you gained). If $A$ is a random variable (for example the answer to a yes/no question then) then you need to average over all possible values of $A$: $$H(X|A) = P(A=yes)H(X|A=yes) + P(A=no)H(X|A=no)$$
     \item
         In the binary search algorithm you gain $1$ bit of information about the position of what you're searching for in each iteration thus making it have runtime $O(\log_2{N})$ since that's how many times you have to half the search space.
+    \item
+        The entropy of a uniform distribution with $N$ events is $\log_2{N}$ for the same reason you need $N$ bits of worth of clues to find a murderer out of $N$ equally suspicious suspects.
+    \item
+        A dictionary with symbols whose frequency follows some probability distribution is more difficult to compress the higher the entropy of the distribution, i.e an optimal encoding of the symbols requires more bits on average to transmit a message constructed from the dictionary.
+    \item
+        When training decision trees a nice strategy is to place yes/no questions on each branch that maximize the expected information gain $IG(X|question)$ given a probability distribution of $X$ defined by frequencies of features in the training data. This means you should ask questions that tends to continuously bisect the training data.
     \item ...
 \end{itemize}
 \end{document}
