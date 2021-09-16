@@ -96,6 +96,17 @@ Speaking more generally: when interfacing with the world you gain information ab
         A dictionary with symbols whose frequency follows some probability distribution is more difficult to compress the higher the entropy of the distribution, i.e an optimal encoding of the symbols requires more bits on average to transmit a message constructed from the dictionary.
     \item
         When training decision trees a nice strategy is to place yes/no questions on each branch that maximize the expected information gain $IG(X|question)$ given a probability distribution of $X$ defined by frequencies of features in the training data. This means you should ask questions that tends to continuously bisect the training data.
-    \item ...
+    \item 
+        Joint entropy is the entropy analogue of a joint distribution.
+        $$H(X,Y) = H(X) + H(Y|X) = H(Y) + H(X|Y)$$
+        Which if $X$ and $Y$ are independent is $H(Y) + H(X)$ since
+        $H(X|Y) = H(X)$. This makes sense because independence means you shouldn't gain any information about the one when learning about the other. The information entropy left in $X$ after conditioning on $Y$ is the same as before conditioning.
+    \item
+        The mutual information $I(X;Y)$ of $X$ and $Y$ is the information that's contained in both $X$ and $Y$. This means you learn $I(X;Y)$ both when you learn $X$ and when you learn $Y$. $H(X|Y)$ is the information left in $X$ after learning $Y$ so $H(X|Y) = H(X) - I(X;Y)$ since $I(X;Y)$ is the information you can learn about $X$ from learning about $Y$.
+    \item
+        This diagram shows the additive relationships between different entropy related quantities of two variables.
+        \includegraphics{additive_entropy}
+        From which you can also deduce for example that 
+        $$I(X;Y) = H(X,Y) - H(X|Y) - H(Y|X)$$
 \end{itemize}
 \end{document}
