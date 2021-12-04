@@ -1,0 +1,46 @@
+\title{Probability Distributions}
+\author{Levi Finkelstein}
+\date{15 10 2021}
+
+\begin{document}
+\maketitle
+
+\textit{A summary of the relationship between different random variables.}
+
+\textbf{Bernoulli}\\
+Flipping a coin with bias $p$: 
+$$P(X=1)=p, P(X=0)=1-p$$
+\par
+
+\textbf{Binomial}\\
+A sum of $n$ identical Bernoullis and getting a sum $k$:
+$$P(X_1 + X_2 + \dotsc + X_n = k) = \binom{n}{k}p^k (1-p)^{n-k}$$
+
+\par
+\textbf{Negative Binomial}\\
+...
+
+\par
+\textbf{Gamma}\\
+...
+
+\par
+\textbf{Normal}\\
+...
+
+
+\textbf{Poisson}\\
+The same as binomial except with an infinite number of Bernoullis normalised so the expected sum is the same $\lambda = np, n\rightarrow \infty, p\rightarrow 0$:
+$$P(X_1 + X_2 + \dotsc + X_\infty = k) = \frac{\lambda^{k}e^{-\lambda}}{k!}$$
+Can be thought of as trials being done continuously, thus the density parameter $\lambda$.
+
+\par
+\textbf{Exponential}\\
+Related to the poisson.
+
+\textbf{Geometric}\\
+The space between successes in the consecutive Bernoulli trials.
+$$P(X=k)=(1-p)^{k-1}p$$
+
+
+\end{document}

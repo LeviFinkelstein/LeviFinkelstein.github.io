@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Levi Finkelstein" />
-  <title>Philosophical Principles</title>
+  <title>Probability Distributions</title>
   <style>
     html {
       line-height: 1.5;
@@ -144,6 +144,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -151,13 +152,26 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Philosophical Principles</h1>
+<h1 class="title">Probability Distributions</h1>
 <p class="author">Levi Finkelstein</p>
-<p class="date">...</p>
+<p class="date">15 10 2021</p>
 </header>
-<p><br />
-<br />
-<em><span>This is an ongoing summary of my most fundamental philosophical beliefs. I’ll continuously update it as my mind changes.</span></em></p>
-<p><strong>My mind is primary.</strong> I see philosophy as a private endeavour in the sense of it being about me making sense of my experiences. At any moment I only have access to the contents of my mind, so anything that could meaningfully thought about has to be thought about in terms of the contents of my mind. The folk philosophy we engage in on a daily basis is mostly a bunch of metaphors that make no sense when taken literally.</p>
+<p><em>A summary of the relationship between different random variables.</em></p>
+<p><strong>Bernoulli</strong><br />
+Flipping a coin with bias <span class="math inline">\(p\)</span>: <span class="math display">\[P(X=1)=p, P(X=0)=1-p\]</span></p>
+<p><strong>Binomial</strong><br />
+A sum of <span class="math inline">\(n\)</span> identical Bernoullis and getting a sum <span class="math inline">\(k\)</span>: <span class="math display">\[P(X_1 + X_2 + \dotsc + X_n = k) = \binom{n}{k}p^k (1-p)^{n-k}\]</span></p>
+<p><strong>Negative Binomial</strong><br />
+...</p>
+<p><strong>Gamma</strong><br />
+...</p>
+<p><strong>Normal</strong><br />
+...</p>
+<p><strong>Poisson</strong><br />
+The same as binomial except with an infinite number of Bernoullis normalised so the expected sum is the same <span class="math inline">\(\lambda = np, n\rightarrow \infty, p\rightarrow 0\)</span>: <span class="math display">\[P(X_1 + X_2 + \dotsc + X_\infty = k) = \frac{\lambda^{k}e^{-\lambda}}{k!}\]</span> Can be thought of as trials being done continuously, thus the density parameter <span class="math inline">\(\lambda\)</span>.</p>
+<p><strong>Exponential</strong><br />
+Related to the poisson.</p>
+<p><strong>Geometric</strong><br />
+The space between successes in the consecutive Bernoulli trials. <span class="math display">\[P(X=k)=(1-p)^{k-1}p\]</span></p>
 </body>
 </html>
